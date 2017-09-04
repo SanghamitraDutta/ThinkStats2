@@ -7,6 +7,7 @@ License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 
 from __future__ import print_function
 
+from collections import Counter
 import sys
 from operator import itemgetter
 
@@ -21,7 +22,12 @@ def Mode(hist):
 
     returns: value from Hist
     """
-    return 0
+    
+    h=Counter({val:freq for val,freq in hist.Items()})
+    Most_Freq = h.most_common(1)
+    Most_Freq_Value = Most_Freq[0][0] #mode
+    
+    return Most_Freq_Value
 
 
 def AllModes(hist):
@@ -31,7 +37,10 @@ def AllModes(hist):
 
     returns: iterator of value-freq pairs
     """
-    return []
+    h=Counter({val:freq for val,freq in hist.Items()})
+    n=len(h)
+    
+    return h.most_common(n)
 
 
 def main(script):
